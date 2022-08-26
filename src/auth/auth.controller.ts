@@ -39,7 +39,13 @@ export class AuthController {
                 // res.cookie('userEmail', response.email, {
                 //     maxAge: 5 * 60 * 1000,
                 // });
-                res.header('Set-Cookie', 'userEmail=' + response.email + ';Path=/;Secure;Max-Age=' + 5 * 60 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'userEmail=' +
+                        response.email +
+                        ';Domain=https://foxy-front-end.vercel.app/;Path=/;Secure;Max-Age=' +
+                        5 * 60 * 1000,
+                );
             } else if (response.error) {
                 // res.cookie('errMessage', response.error, {
                 //     maxAge: 30 * 1000,
@@ -59,7 +65,13 @@ export class AuthController {
                 // res.cookie('userEmail', response.email, {
                 //     maxAge: 3 * 60 * 1000,
                 // });
-                res.header('Set-Cookie', 'userEmail=' + response.email + ';Path=/;Secure;Max-Age=' + 5 * 60 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'userEmail=' +
+                        response.email +
+                        ';Domain=https://foxy-front-end.vercel.app/;Path=/;Secure;Max-Age=' +
+                        5 * 60 * 1000,
+                );
             } else if (response.error) {
                 // res.cookie('errMessage', response.error, {
                 //     maxAge: 30 * 1000,
