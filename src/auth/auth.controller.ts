@@ -39,12 +39,18 @@ export class AuthController {
                 // res.cookie('userEmail', response.email, {
                 //     maxAge: 5 * 60 * 1000,
                 // });
-                res.header('Set-Cookie', 'userEmail=' + response.email + ';Path=/;Secure;Max-Age=' + 5 * 60 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'userEmail=' + response.email + ';SameSite=None; Secure;Max-Age=' + 5 * 60 * 1000,
+                );
             } else if (response.error) {
                 // res.cookie('errMessage', response.error, {
                 //     maxAge: 30 * 1000,
                 // });
-                res.header('Set-Cookie', 'errMessage=' + response.error + ';Path=/;Secure;Max-Age=' + 30 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'errMessage=' + response.error + ';SameSite=None; Secure;Max-Age=' + 30 * 1000,
+                );
             }
             res.redirect(response.redirectUrl);
         }
@@ -59,12 +65,18 @@ export class AuthController {
                 // res.cookie('userEmail', response.email, {
                 //     maxAge: 3 * 60 * 1000,
                 // });
-                res.header('Set-Cookie', 'userEmail=' + response.email + ';Path=/;Secure;Max-Age=' + 5 * 60 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'userEmail=' + response.email + ';SameSite=None; Secure;Max-Age=' + 5 * 60 * 1000,
+                );
             } else if (response.error) {
                 // res.cookie('errMessage', response.error, {
                 //     maxAge: 30 * 1000,
                 // });
-                res.header('Set-Cookie', 'errMessage=' + response.error + ';Path=/;Secure;Max-Age=' + 30 * 1000);
+                res.header(
+                    'Set-Cookie',
+                    'errMessage=' + response.error + ';SameSite=None; Secure;Max-Age=' + 30 * 1000,
+                );
             }
             res.redirect(response.redirectUrl);
         }
