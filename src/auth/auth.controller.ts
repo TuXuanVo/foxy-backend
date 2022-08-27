@@ -38,7 +38,8 @@ export class AuthController {
             if (response.email) {
                 res.cookie('userEmail', response.email, {
                     maxAge: 5 * 60 * 1000,
-                    domain: 'foxy-front-end.herokuapp.com/',
+                    domain: 'foxy-front-end.herokuapp.com',
+                    httpOnly: false,
                     path: '/',
                     secure: true,
 
@@ -47,10 +48,10 @@ export class AuthController {
             } else if (response.error) {
                 res.cookie('errMessage', response.error, {
                     maxAge: 30 * 1000,
-                    domain: 'foxy-front-end.herokuapp.com/',
+                    domain: 'foxy-front-end.herokuapp.com',
+                    httpOnly: false,
                     path: '/',
                     secure: true,
-
                     sameSite: 'none',
                 });
             }
@@ -66,6 +67,8 @@ export class AuthController {
             if (response.email) {
                 res.cookie('userEmail', response.email, {
                     maxAge: 3 * 60 * 1000,
+                    domain: 'foxy-front-end.herokuapp.com',
+                    httpOnly: false,
                     path: '/',
                     secure: true,
                     sameSite: 'none',
@@ -73,6 +76,8 @@ export class AuthController {
             } else if (response.error) {
                 res.cookie('errMessage', response.error, {
                     maxAge: 30 * 1000,
+                    domain: 'foxy-front-end.herokuapp.com',
+                    httpOnly: false,
                     path: '/',
                     secure: true,
                     sameSite: 'none',
