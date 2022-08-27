@@ -12,7 +12,7 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
         logger: ['log'],
     });
-    app.enableCors();
+    app.enableCors({ origin: 'https://foxy-front-end.herokuapp.com/', credentials: true });
     app.use(cookieParser());
     app.setGlobalPrefix('api/v1');
     app.useGlobalPipes(
