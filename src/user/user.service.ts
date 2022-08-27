@@ -53,6 +53,8 @@ import {
     DELETE_IMAGE_ALBUMS_SUCCESSFULLY,
     ERROR_UPDATE_USER_HEIGHT,
     UPDATE_USER_HEIGHT_SUCCESSFULLY,
+    GET_FRIENDS_SUCCESSFULLY,
+    ERROR_GET_FRIENDS,
 } from 'src/constance/responseCode';
 import { ConversationService } from 'src/conversation/conversation.service';
 import { CommonInfoDto, UserCreateDto, UserCreateWithPhoneDto, UserFirstUpdateDto, UserUpdateDto } from 'src/dto';
@@ -196,6 +198,7 @@ export class UserService {
 
                 await this.notificationService.match(userA, userB);
             } else {
+                console.log('like ne');
                 await this.notificationService.like(toUser);
 
                 await this.matchService.create(fromUser, toUser);
@@ -1128,6 +1131,26 @@ export class UserService {
         } catch (error) {
             return handleResponse({
                 error: error.response?.error ? error.response.error : ERROR_UPDATE_USER_HEIGHT,
+                statusCode: error.response?.statusCode ? error.response.statusCode : HttpStatus.BAD_REQUEST,
+            });
+        }
+    }
+    async getFriends(userId: string) {
+        try {
+            const user = await this.userModel.findById(userId).populate('friends', '_id name email avatar');
+            if (!user) {
+                return handleResponse({
+                    error: USER_NOT_FOUND,
+                    statusCode: HttpStatus.NOT_FOUND,
+                });
+            }
+            return handleResponse({
+                message: GET_FRIENDS_SUCCESSFULLY,
+                data: user.friends,
+            });
+        } catch (error) {
+            return handleResponse({
+                error: error.response?.error ? error.response.error : ERROR_GET_FRIENDS,
                 statusCode: error.response?.statusCode ? error.response.statusCode : HttpStatus.BAD_REQUEST,
             });
         }

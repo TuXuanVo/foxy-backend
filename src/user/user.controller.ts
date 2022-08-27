@@ -196,27 +196,34 @@ export class UserController {
     @ApiBearerAuth('access_token')
     @UseGuards(JwtGuard)
     async updateFavoriteImage(@Req() req: Request, @Body() body: ImageDto) {
-        return this.userService.updateFavoriteImage((req.user as JWT_Info)._id, body.url);
+        return await this.userService.updateFavoriteImage((req.user as JWT_Info)._id, body.url);
     }
 
     @Put('update-default-image')
     @ApiBearerAuth('access_token')
     @UseGuards(JwtGuard)
     async updateDefaultImage(@Req() req: Request, @Body() body: ImageDto) {
-        return this.userService.updateDefaultImage((req.user as JWT_Info)._id, body.url);
+        return await this.userService.updateDefaultImage((req.user as JWT_Info)._id, body.url);
     }
 
     @Delete('delete-image')
     @ApiBearerAuth('access_token')
     @UseGuards(JwtGuard)
     async deleteImage(@Req() req: Request, @Body() body: ImageDto) {
-        return this.userService.deleteImage((req.user as JWT_Info)._id, body.url);
+        return await this.userService.deleteImage((req.user as JWT_Info)._id, body.url);
     }
 
     @Put('update-height')
     @ApiBearerAuth('access_token')
     @UseGuards(JwtGuard)
     async updateHeight(@Req() req: Request, @Body() body: HeightDto) {
-        return this.userService.updateHeight((req.user as JWT_Info)._id, body.height);
+        return await this.userService.updateHeight((req.user as JWT_Info)._id, body.height);
+    }
+
+    @Get('friends')
+    @ApiBearerAuth('access_token')
+    @UseGuards(JwtGuard)
+    async getFriends(@Req() req: Request) {
+        return await this.userService.getFriends((req.user as JWT_Info)._id);
     }
 }

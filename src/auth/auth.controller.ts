@@ -32,25 +32,17 @@ export class AuthController {
 
     @Get('/facebook/redirect')
     @UseGuards(AuthGuard('facebook'))
-    async facebookLoginRedirect(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<any> {
+    async facebookLoginRedirect(@Req() req: Request, @Res() res: Response): Promise<any> {
         const response = await this.authService.socialLogin(req.user as SocialReponse);
         if ('redirectUrl' in response) {
             if (response.email) {
-                // res.cookie('userEmail', response.email, {
-                //     maxAge: 5 * 60 * 1000,
-                // });
-                res.header(
-                    'Set-Cookie',
-                    'userEmail=' + response.email + ';SameSite=None; Secure;Max-Age=' + 5 * 60 * 1000,
-                );
+                res.cookie('userEmail', response.email, {
+                    maxAge: 5 * 60 * 1000,
+                });
             } else if (response.error) {
-                // res.cookie('errMessage', response.error, {
-                //     maxAge: 30 * 1000,
-                // });
-                res.header(
-                    'Set-Cookie',
-                    'errMessage=' + response.error + ';SameSite=None; Secure;Max-Age=' + 30 * 1000,
-                );
+                res.cookie('errMessage', response.error, {
+                    maxAge: 30 * 1000,
+                });
             }
             res.redirect(response.redirectUrl);
         }
@@ -58,25 +50,17 @@ export class AuthController {
 
     @Get('/google/redirect')
     @UseGuards(AuthGuard('google'))
-    async googleLoginRedirect(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    async googleLoginRedirect(@Req() req: Request, @Res() res: Response) {
         const response = await this.authService.socialLogin(req.user as SocialReponse);
         if ('redirectUrl' in response) {
             if (response.email) {
-                // res.cookie('userEmail', response.email, {
-                //     maxAge: 3 * 60 * 1000,
-                // });
-                res.header(
-                    'Set-Cookie',
-                    'userEmail=' + response.email + ';SameSite=None; Secure;Max-Age=' + 5 * 60 * 1000,
-                );
+                res.cookie('userEmail', response.email, {
+                    maxAge: 3 * 60 * 1000,
+                });
             } else if (response.error) {
-                // res.cookie('errMessage', response.error, {
-                //     maxAge: 30 * 1000,
-                // });
-                res.header(
-                    'Set-Cookie',
-                    'errMessage=' + response.error + ';SameSite=None; Secure;Max-Age=' + 30 * 1000,
-                );
+                res.cookie('errMessage', response.error, {
+                    maxAge: 30 * 1000,
+                });
             }
             res.redirect(response.redirectUrl);
         }

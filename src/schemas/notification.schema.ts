@@ -25,11 +25,13 @@ export class Notification {
     })
     message: string;
 
-    @Prop({
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    })
-    user: UserDocument | string;
+    @Prop([
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ])
+    user: UserDocument[] | string[];
 
     @Prop({
         type: Boolean,

@@ -38,12 +38,14 @@ export class ConversationService {
                     error: ERROR_ID_INVALID,
                     statusCode: HttpStatus.BAD_REQUEST,
                 });
-            const conversationCount = await this.conversationModel.countDocuments({
-                _id: id,
-                users: {
-                    $in: [userId],
-                },
-            });
+            const conversationCount = (
+                await this.conversationModel.findOne({
+                    _id: id,
+                    users: {
+                        $in: [userId],
+                    },
+                })
+            ).messages.length;
             const conversation = await this.conversationModel
                 .findOne({
                     _id: id,
@@ -65,6 +67,7 @@ export class ConversationService {
                     error: ERROR_CONVERSATION_NOT_FOUND,
                     statusCode: HttpStatus.NOT_FOUND,
                 });
+            console.log(conversationCount > page * limit);
             return handleResponse({
                 message: GET_CONVERSATION_SUCCESSFULLY,
                 data: { conversation, limit: +limit, page: +page, next: conversationCount > page * limit },
