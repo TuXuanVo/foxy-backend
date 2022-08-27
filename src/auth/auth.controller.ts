@@ -62,14 +62,12 @@ export class AuthController {
             if (response.email) {
                 res.cookie('userEmail', response.email, {
                     maxAge: 3 * 60 * 1000,
-                    domain: 'foxy-front-end.herokuapp.com/',
                     path: '/',
                     sameSite: 'none',
                 });
             } else if (response.error) {
                 res.cookie('errMessage', response.error, {
                     maxAge: 30 * 1000,
-                    domain: 'foxy-front-end.herokuapp.com/',
                     path: '/',
                     sameSite: 'none',
                 });
