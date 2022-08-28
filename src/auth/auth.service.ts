@@ -314,6 +314,7 @@ export class AuthService {
                 },
             });
         } catch (error) {
+            console.log(error);
             return handleResponse({
                 error: error.response?.error || ERROR_VERIFY_OTP,
                 statusCode: error.response?.statusCode || HttpStatus.BAD_REQUEST,
